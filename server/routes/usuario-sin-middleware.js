@@ -8,22 +8,9 @@ const app = express();
 
 const Usuario = require('../models/usuario');
 
-const { verificaToken, verificaAdmin_Role } = require('../middlewares/autenticacion');
-
-// ==========
-// GET - Parametros
-// nombre de ruta
-// middleware
-// funcion
-// ==========
-app.get('/usuario', verificaToken, (request, resuesta) => {
-	
-	/*return resuesta.json({
-		usuario: request.usuario,
-		nombre: request.usuario.nombre,
-		email :request.usuario.email
-	});*/
-
+//peticion GET - obtener registro - localhost:3000/usuario
+//peticion GET - obtener registro con parametro - localhost:3000/usuario?parametro=valor&OtroParametro=valor
+app.get('/usuario', function (request, resuesta) {
 	//enviar en formato html->send, formato json->json
 	//resuesta.json('get usuario LOCAL');
 
@@ -60,8 +47,7 @@ app.get('/usuario', verificaToken, (request, resuesta) => {
 });	
 
 //peticion POST - hacer registro - localhost:3000/usuario
-app.post('/usuario', [verificaToken, verificaAdmin_Role], (request, resuesta) => {
-
+app.post('/usuario', function (request, resuesta) {
 	//este body es lo que me retornara el middleware
 	let body = request.body;
 
@@ -113,8 +99,7 @@ app.post('/usuario', [verificaToken, verificaAdmin_Role], (request, resuesta) =>
 
 //peticion PUT - actualizar registro - localhost:3000/usuario/:id
 //:id -> parametro a recibir
-app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], (request, resuesta)=> {
-
+app.put('/usuario/:id', function (request, resuesta) {
 	//obtener parametro
 	let parametro = request.params.id;
 
@@ -164,7 +149,7 @@ app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], (request, resuesta)
 
 //peticion DELETE - Borrar registro - localhost:3000/usuario
 //:id -> parametro a recibir
-app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], (request, resuesta)=> {
+app.delete('/usuario/:id', function (request, resuesta) {
 	//enviar en formato html->send, formato json->json
 	//resuesta.json('delete usuario');
 

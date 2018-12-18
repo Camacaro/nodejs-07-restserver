@@ -15,8 +15,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-/*impotamos y usamos el require, en este caso las rutas*/
-app.use( require('./routes/usuario') )
+/*impotamos y usamos el require, en este caso las rutas, configuracion global*/
+app.use( require('./routes/index') )
 
 /*Conexion a la db, el callback recibe el error o la respuesta, la base de datos cafe no existe pero mongodb la puede crear cuando se haga una insercion*/
 mongoose.connect(process.env.URLDB, (err, rep)=>{

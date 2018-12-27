@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Google Sign-In Demo</title>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<meta name="google-signin-client_id" content="976746824371-pdd6n3p9qpv71picll43drc4natsko1i.apps.googleusercontent.com">
+</head>
+<body>
+	<div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+	<a href="#" onclick="signOut();">Sign out</a>
+
+	
+
+
+
+	<script type="text/javascript">
+		function onSignIn(googleUser) {
+		  	var profile = googleUser.getBasicProfile();
+		  	console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+		  	console.log('Name: ' + profile.getName());
+		  	console.log('Image URL: ' + profile.getImageUrl());
+		  	console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+		  	var id_token = googleUser.getAuthResponse().id_token;
+		  	console.log(id_token);
+
+		  	// ==========
+			// Esta es una peticion ajax con javascritp puro
+			// ==========
+		  	var xhr = new XMLHttpRequest();
+		  	// ==========
+			// Ruta, /goole esta dentro de la carpeta rutas
+			// ==========
+			xhr.open('POST', '/google');
+			// ==========
+			// Cabecera
+			// ==========
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			// ==========
+			// Respuesta luego de la peticion
+			// ==========
+			xhr.onload = function() {
+			  console.log('Signed in as: ' + xhr.responseText);
+			};
+			// ==========
+			// Variable a enviar, es como un input
+			// ==========
+			xhr.send('idtoken=' + id_token);
+		}
+
+		function signOut() {
+		    var auth2 = gapi.auth2.getAuthInstance();
+		    auth2.signOut().then(function () {
+		      	console.log('User signed out.');
+		    });
+		}
+	</script>
+
+
+</body>
+</html>

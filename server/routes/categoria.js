@@ -4,7 +4,7 @@ let { verificaToken, verificaAdmin_Role } = require('../middlewares/autenticacio
 
 let app = express();
 
-let Categoria = require('../models/Categoria');
+let Categoria = require('../models/categoria');
 
 // =============================
 // Mostrar todas las categorias

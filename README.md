@@ -2,4 +2,7 @@
 
 Recuerda instalar los paquetes
 
-```npm install```
+```$ npm install```
+
+## Levantar servicio
+```$ node server/server.js```
